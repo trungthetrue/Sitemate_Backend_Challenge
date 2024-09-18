@@ -7,8 +7,8 @@ app.use(express.json());
 app.use(cors());
 
 let issues = [
-    { id: '1', title: "Issue 1", description: "Description for issue 1" },
-    { id: '2', title: "Issue 2", description: "Description for issue 2" },
+    { id: 1, title: "Issue 1", description: "Description for issue 1" },
+    { id: 2, title: "Issue 2", description: "Description for issue 2" },
 ];
 
 // Read - Get all issues
@@ -21,7 +21,7 @@ app.post('/issues', (req, res) => {
     const newIssue = req.body;
 
     // Check if the issue ID already exists
-    const issueExists = issues.some(issue => issue.id === newIssue.id);
+    const issueExists = issues.some(issue => issue.id == newIssue.id);
 
     if (issueExists) {
         // Send an error response if the ID already exists
@@ -38,7 +38,7 @@ app.post('/issues', (req, res) => {
 app.put('/issues/:id', (req, res) => {
     const issueId = parseInt(req.params.id);
     const updatedIssue = req.body;
-    let issueIndex = issues.findIndex(issue => issue.id === issueId);
+    let issueIndex = issues.findIndex(issue => issue.id == issueId);
     
     if (issueIndex !== -1) {
         issues[issueIndex] = { ...issues[issueIndex], ...updatedIssue };
@@ -52,7 +52,7 @@ app.put('/issues/:id', (req, res) => {
 // Delete - Remove an issue
 app.delete('/issues/:id', (req, res) => {
     const issueId = parseInt(req.params.id);
-    const issueIndex = issues.findIndex(issue => issue.id === issueId);
+    const issueIndex = issues.findIndex(issue => issue.id == issueId);
     
     if (issueIndex !== -1) {
         const deletedIssue = issues.splice(issueIndex, 1);
